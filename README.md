@@ -17,13 +17,20 @@ probabilities from my CAMs.
 2. The more explainable the model is, the better classification results will be made
 
 
+<p align="center">
+  <b>Highly discriminative Class-Activation-Maps for the predicted classes</b>
+  <img src="imgs/cams.PNG">
+</p>
+
 
 ## Training
 I trained according to the Puzzle-CAM paper with each images being tiled to four single images and considering the full-image CAMs versus the tiled-image CAMs in a loss function. 
 I used a ResNest-101 and an EfficientNet-B4 with the according GAP Layers added and Focal Loss function.
 
 The following diagram shows the training process for the CAM-Models, exemplary for ResNest-101
-![Training](imgs/train.jpg)
+<p align="center">
+  <img src="imgs/train.jpg">
+</p>
 
 **Training Time**   
 3 Epochs for CAM-models on V100:  
@@ -44,12 +51,16 @@ This gives very large class activated values for each class for each cell, which
 
 The gradient boosting regressors (GBR) is trained for every model the final inference will be done on, to ensure that the potentially different CAM-intensities across the models
 don't have an impact on the prediction quality. The two GBR for the ResNest-101 models show the following function for the mapping of the normalized-CAM-intensities to the probability of the target class 
-![Inferencing](imgs/gradboost.jpg)
+<p align="center">
+<img src="imgs/gradboost2.PNG">
+</p>
 
-In the end I combined both approaches.
+In the end I combined both approaches. **To get probability values from the intensity of the CAMs was the most crucial step in my inferencing pipeline and improving this component gave the highest rises in mAP on the test images.**
 
 The following diagram shows the inferencing process
-![Inferencing](imgs/inf1.jpg)
+<p align="center">
+  <img src="imgs/inf1.jpg">
+</p>
 
 
 *remarks on making the code work*

@@ -25,6 +25,14 @@ I used a ResNest-101 and an EfficientNet-B4 with the according GAP Layers added 
 The following diagram shows the training process for the CAM-Models, exemplary for ResNest-101
 ![Training](imgs/train.jpg)
 
+**Training Time**
+3 Epochs for CAM-models on V100:  
+3x EfficientNet-B4: 120 min per model = 360 min
+2x ResNeSt-101: 360 min per model = 720 min  
+10 Epochs for Image-level-models on TPU:  
+ViT, ResNext, EfficientNet-B7: 120 min = 360 min  
+*Total: 24h*
+
 
 ## Inferencing
 Here's the interesting part. I'm simply multiplying the CAM of each class with the cell mask of each cell and the class probability the model produces (using a Swish-Activation to obtain the CAMs gives slightly better results than raw CAMs or ReLU). 

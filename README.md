@@ -12,7 +12,7 @@ Like many of you, I read a lot a weakly-labeled instance segmentation and eventu
 For this to achieve, a model producing good Class-Activation-Maps was needed so I decided to try Puzzle-CAM and do some mapping magic for inferencing to get 
 probabilities from my CAMs.  
 
-***Things I like about this approach:***
+***Remarks about this approach:***
 1. No single cell segmentation has to be done for training 
 2. The more explainable the model is, the better classification results will be made
 
@@ -25,7 +25,7 @@ I used a ResNest-101 and an EfficientNet-B4 with the according GAP Layers added 
 The following diagram shows the training process for the CAM-Models, exemplary for ResNest-101
 ![Training](imgs/train.jpg)
 
-**Training Time**
+**Training Time**   
 3 Epochs for CAM-models on V100:  
 3x EfficientNet-B4: 120 min per model = 360 min
 2x ResNeSt-101: 360 min per model = 720 min  
@@ -41,6 +41,10 @@ This gives very large class activated values for each class for each cell, which
 - standardize the values of each image using sklearn.preprocessing.StandardScaler and applying a sigmoid function to these values (works surprisingly good)
 - Do the inferencing on the single-class labeled train data to get the raw values and train a gradient boosting regressor to learn the according label (0..1) for each class 
 (to make sure, that the right mapping function, that might be different from the sigmoid function, is found)
+
+The gradient boosting regressors (GBR) is trained for every model the final inference will be done on, to ensure that the potentially different CAM-intensities across the models
+don't have an impact on the prediction quality. The two GBR for the ResNest-101 models show the following function for the mapping of the normalized-CAM-intensities to the probability of the target class 
+![Inferencing](imgs/gradboost.jpg)
 
 In the end I combined both approaches.
 

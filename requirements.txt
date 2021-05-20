@@ -1,0 +1,17 @@
+scikit-multilearn
+iterative-stratification
+albumentations==0.4.6
+efficientnet-pytorch==0.7.0
+git+https://github.com/rwightman/pytorch-image-models
+keras 
+keras-applications
+vit-keras
+tensorflow-addons
+inference/pytorch_zoo-master
+efficientnet
+git+https://github.com/qubvel/efficientnet
+torch==1.7.1+cu101 
+torchvision==0.8.2+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+pympler
+opencv-python==4.5.1.48
+https://github.com/SamusRam/HPA-Cell-Segmentation/archive/master.zip

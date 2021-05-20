@@ -68,7 +68,7 @@ The following diagram shows the inferencing process
 The models are trained on the [standard data provided by HPA](https://www.kaggle.com/c/hpa-single-cell-image-classification/data) and an additional dataset
 containing more data provided by [HPA with only "rare" classes](https://www.kaggle.com/alexanderriedel/hpa-public-768-excl-0-16). Be sure to place these datasets in `train-cam-model/train_data/`
 Also carefully check `train-cam-model/config.py` about hyperparameters and models
-* *Train the Image-Level-Models starting here:* `rain-image-level-model/train_img.py`  
+* *Train the Image-Level-Models starting here:* `train-image-level-model/train_img.py`  
 This script is best run in a Kaggle TPU-Instance as it's TPU-Training and not downloading the image data to a local space but gets them directly from GCS where the Kaggle datasets are stored.
 
 * *Train the Gradient Boosting Regressor starting here:* `train-gradboost-regressor/train_grad_boost.py`  
